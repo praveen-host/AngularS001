@@ -1,0 +1,29 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:    
+    - name: Build the Docker image
+      uses: actions/checkout@v3      
+    
+    - name: 'Docker Login'
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: Set current date as env variable
+      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+      
+    - name: Build the frontend image and push it to ACR
+      uses: docker/build-push-action@v4
+      with:
+        push: true
+        tags: praveenhostangulars001.azurecr.io/praveenhostangulars001:${{ github.run_number }}
+        file: my-docker-angular-app/Dockerfile
