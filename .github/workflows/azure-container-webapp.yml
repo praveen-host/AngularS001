@@ -1,8 +1,4 @@
 name: Build and deploy a container to an Azure Web App
-
-env:
-  AZURE_WEBAPP_NAME: praveenhostAngulars001
-
 on:
   push:
     branches: [ "master" ]
@@ -14,7 +10,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -35,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: praveenhostangulars001.azurecr.io/praveenhostangulars001:${{ github.run_number }}
+          tags: ${{secrets.AZURE_REG}}/{{secrets.AZURE_REPO}}:${{ github.run_number }}
           file: Dockerfile
         
   deploy:
@@ -55,6 +50,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: 'praveenhostangulars001.azurecr.io/praveenhostangulars001:${{ github.run_number }}'
+          images: '${{secrets.AZURE_REG}}/{{secrets.AZURE_REPO}}:${{ github.run_number }}'
