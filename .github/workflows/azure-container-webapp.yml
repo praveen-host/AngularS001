@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      
+        
       - name: 'Docker Login'
         uses: azure/docker-login@v1
         with:
@@ -25,11 +25,8 @@ jobs:
         
       - name: Lowercase the repo name and username
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-      
-      - name: Test reg and repo
-        run: echo " ${{ secrets.AZURE_WEBAPP_NAME }}/${{ secrets.AZURE_REPO }}:${{ github.run_number }}"
-        
-      - name: Build the frontend image and push it to ACR
+              
+      - name: Build App Image and push it to ACR
         uses: docker/build-push-action@v4
         with:
           push: true
