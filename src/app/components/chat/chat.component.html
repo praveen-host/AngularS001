@@ -1,0 +1,76 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<div class="row">
+    <div class="col-md-3 bg-white ">
+        <div class=" row border-bottom padding-sm" style="height: 40px;">
+            Member
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- member list -->
+        <ul class="friend-list">
+            <li *ngFor="let item of activeUsers" >
+                <a href="#" class="clearfix">
+                    <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                    <div class="friend-name">
+                        <strong>{{item.firstName}}</strong>
+                    </div>
+                    <div class="last-message text-muted">Hello, Are you there?</div>
+                    <small class="time text-muted">Just now</small>
+                    <small class="chat-alert label label-danger">1</small>
+                </a>
+            </li>
+         
+            
+        </ul>
+    </div>
+
+    <!--=========================================================-->
+    <!-- selected chat -->
+    <div class="col-md-9 bg-white ">
+        <div class="row col-12 sticky-top">
+            asdfasdf
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="chat-message">
+                    <ul class="chat">
+                        <li class="left clearfix" *ngFor="let item of messages">
+                            <span class="chat-img pull-left">
+                                <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">John Doe</strong>
+                                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins
+                                        ago</small>
+                                </div>
+                                <p>
+                                    {{item.message}}
+                                </p>
+                            </div>
+                        </li>
+n
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-9 bg-white footer">
+
+        <div class="input-group">
+            <input class="form-control border no-shadow no-rounded" placeholder="Type your message here">
+            <span class="input-group-btn">
+                <button class="btn btn-success no-rounded" type="button" (click)="sendMessage()">Send</button>
+            </span>
+        </div><!-- /input-group -->
+
+    </div>
+
+</div>
