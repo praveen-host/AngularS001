@@ -26,11 +26,14 @@ jobs:
       - name: Lowercase the repo name and username
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
       
+      - name: Test reg and repo
+        run: echo " ${{ secrets.AZURE_REG }}/${{ secrets.AZURE_REPO }}:${{ github.run_number }}"
+        
       - name: Build the frontend image and push it to ACR
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{secrets.AZURE_REG}}/${{secrets.AZURE_REPO}}:${{ github.run_number }}
+          tags: ${{ secrets.AZURE_REG }}/${{ secrets.AZURE_REPO }}:${{ github.run_number }}
           file: Dockerfile
         
   deploy:
