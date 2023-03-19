@@ -26,4 +26,4 @@ jobs:
       with:
         push: true
         tags: praveenhostangulars001.azurecr.io/praveenhostangulars001:${{ github.run_number }}
-        file: angulars001/Dockerfile
+        file: Dockerfile
